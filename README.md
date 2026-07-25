@@ -17,7 +17,7 @@ cd
 mkdir -p ~/.local/bin
 curl -SLo ~/.local/bin/um-edit https://raw.githubusercontent.com/Error10556/um/refs/heads/main/um-edit
 chmod +x ~/.local/bin/um-edit
-printf $'\n%s\n' "alias um=\"um-edit \\\"\\\$(history -p '\!\!')\\\"\"" >>.bashrc
+printf $'\n%s\n' "alias um=\"um-edit \\\"\\\$(history -p '!""!""')\\\"\"" >>.bashrc
 
 # If ~/.local/bin is not in PATH,
 printf $'%s\n' 'PATH="$PATH:$HOME/.local/bin"' >>.bashrc
