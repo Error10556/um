@@ -1,5 +1,21 @@
 #!/bin/env bash
 
+CONFIGDIR="$HOME/.config"
+CONFIGFILE="$CONFIGDIR/umrc"
+
+if [ ! -f "$CONFIGFILE" ]; then
+    mkdir -p "$CONFIGDIR"
+    echo $'UMEDITOR=vim\nECHO=1  # set empty to disable' >"$CONFIGFILE"
+    UMEDITOR=vim
+    ECHO=true
+else
+    . "$CONFIGFILE"
+fi
+
+if [ -z "$UMEDITOR" ]; then
+    UMEDITOR=vim
+fi
+
 if [ "$#" = 0 ]; then
     echo "Execute \`um-edit -h\` for help"
     exit 0
@@ -27,25 +43,9 @@ Now, after you've made a typo in a command, you'll be able to execute "um"
 and correct the mistake. To cancel, do not edit the command or clear it.
 
 If your favorite editor is not vim, edit your ~/.config/umrc
-(will appear after first use).
+(default config appears after first use).
 EOF
     exit 0
-fi
-
-CONFIGDIR="$HOME/.config"
-CONFIGFILE="$CONFIGDIR/umrc"
-
-if [ ! -f "$CONFIGFILE" ]; then
-    mkdir -p "$CONFIGDIR"
-    echo $'UMEDITOR=vim\nECHO=1  # set empty to disable' >"$CONFIGFILE"
-    UMEDITOR=vim
-    ECHO=true
-else
-    . "$CONFIGFILE"
-fi
-
-if [ -z "$UMEDITOR" ]; then
-    UMEDITOR=vim
 fi
 
 set -e
